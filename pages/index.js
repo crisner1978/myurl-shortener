@@ -23,7 +23,7 @@ const Home = () => {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-slate-900">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-t from-orange-200 via-yellow-100 to-blue-800">
       <Head>
         <title>Microservice - URL Shortener</title>
         <link rel="icon" href="/favicon.ico" />
