@@ -5,6 +5,7 @@ import { useMutation } from 'react-query'
 import isURL from 'validator/lib/isURL'
 import { Orbit } from '@uiball/loaders'
 import { isDev, DEV_URL, PROD_URL } from '../config'
+import { useRef, useState } from 'react'
 
 const Home = () => {
   const {
@@ -13,7 +14,8 @@ const Home = () => {
     reset,
     formState: { errors },
   } = useForm({ mode: 'onBlur' })
-  console.log(DEV_URL)
+  const textRef = useRef(null)
+  const [copySuccess, setCopySuccess] = useState('')
   const { data, mutateAsync, isLoading } = useMutation(
     (url) =>
       fetch('/api/shorturl', {
@@ -26,6 +28,11 @@ const Home = () => {
       },
     }
   )
+
+  const copyToClipboard = async (copyMe) => {
+    await navigator.clipboard.writeText(copyMe)
+    setCopySuccess('Copied!')
+  }
 
   const onSubmit = (data) => {
     const { url } = data
@@ -91,23 +98,37 @@ const Home = () => {
               </div>
             )}
           </div>
-          {data && (
-            <p className="absolute bottom-0 right-0 left-0 mb-6 transform cursor-pointer text-sm font-bold transition-all duration-300 hover:-translate-y-1 hover:text-sky-600 sm:text-base">
-              {isDev
-                ? `${DEV_URL}${data?.short_url}`
-                : `${PROD_URL}${data?.short_url}`}{' '}
-              <a
-                href={
-                  isDev
-                    ? `${DEV_URL}${data?.short_url}`
-                    : `${PROD_URL}${data?.short_url}`
+          {data &&
+            (copySuccess ? (
+              <span className="absolute bottom-0 right-0 left-0 mb-6 text-sm font-bold sm:text-base">
+                {copySuccess}
+              </span>
+            ) : (
+              <p
+                className="absolute bottom-0 right-0 left-0 mb-6 transform cursor-pointer text-sm font-bold transition-all duration-300 hover:-translate-y-1 hover:text-sky-600 sm:text-base"
+                onClick={() =>
+                  copyToClipboard(
+                    isDev
+                      ? `${DEV_URL}${data?.short_url}`
+                      : `${PROD_URL}${data?.short_url}`
+                  )
                 }
-                className="ml-2 rounded-full bg-gradient-to-br from-green-400 to-green-600 px-3 py-2 text-lg text-white shadow-lg"
               >
-                GO
-              </a>
-            </p>
-          )}
+                {isDev
+                  ? `${DEV_URL}${data?.short_url}`
+                  : `${PROD_URL}${data?.short_url}`}{' '}
+                <a
+                  href={
+                    isDev
+                      ? `${DEV_URL}${data?.short_url}`
+                      : `${PROD_URL}${data?.short_url}`
+                  }
+                  className="ml-2 rounded-full bg-gradient-to-br from-green-400 to-green-600 px-3 py-2 text-lg text-white shadow-lg"
+                >
+                  GO
+                </a>
+              </p>
+            ))}
         </form>
         {data && (
           <div className="container absolute top-0 left-0 px-10 pt-3">
