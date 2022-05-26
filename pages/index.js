@@ -35,6 +35,7 @@ const Home = () => {
   }
 
   const onSubmit = (data) => {
+    setCopySuccess('')
     const { url } = data
     return isURL(url) && mutateAsync(url)
   }
@@ -104,19 +105,21 @@ const Home = () => {
                 {copySuccess}
               </span>
             ) : (
-              <p
-                className="absolute bottom-0 right-0 left-0 mb-6 transform cursor-pointer text-sm font-bold transition-all duration-300 hover:-translate-y-1 hover:text-sky-600 sm:text-base"
-                onClick={() =>
-                  copyToClipboard(
-                    isDev
-                      ? `${DEV_URL}${data?.short_url}`
-                      : `${PROD_URL}${data?.short_url}`
-                  )
-                }
-              >
-                {isDev
-                  ? `${DEV_URL}${data?.short_url}`
-                  : `${PROD_URL}${data?.short_url}`}{' '}
+              <p className="absolute bottom-0 right-0 left-0 mb-6 transform cursor-pointer text-sm font-bold transition-all duration-300 hover:-translate-y-1 hover:text-sky-600 sm:text-base">
+                <span
+                  onClick={() =>
+                    copyToClipboard(
+                      isDev
+                        ? `${DEV_URL}${data?.short_url}`
+                        : `${PROD_URL}${data?.short_url}`
+                    )
+                  }
+                >
+                  {isDev
+                    ? `${DEV_URL}${data?.short_url}`
+                    : `${PROD_URL}${data?.short_url}`}{' '}
+                </span>
+
                 <a
                   href={
                     isDev
