@@ -1,10 +1,8 @@
 import dns from 'dns'
 import urlParser from 'url'
-import { customAlphabet, nanoid } from 'nanoid'
+import { nanoid } from 'nanoid'
 import ShortURL from '../../../models/shortURLModel'
 import dbConnect from '../../../lib/dbConnect'
-
-const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {

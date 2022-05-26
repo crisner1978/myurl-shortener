@@ -9,7 +9,6 @@ export default async function handler(req, res) {
 }
 
 async function getShortURL(req, res) {
-  console.log("req.params", req)
   let { slug } = req.query;
   ShortURL.find({ suffix: slug }).then(function (foundUrls) {
     let urlRedirect = foundUrls[0];
