@@ -5,7 +5,7 @@ import { useMutation } from 'react-query'
 import isURL from 'validator/lib/isURL'
 import { Orbit } from '@uiball/loaders'
 import { isDev, DEV_URL, PROD_URL } from '../config'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 
 const Home = () => {
   const {
@@ -14,7 +14,7 @@ const Home = () => {
     reset,
     formState: { errors },
   } = useForm({ mode: 'onBlur' })
-  const textRef = useRef(null)
+
   const [copySuccess, setCopySuccess] = useState('')
   const { data, mutateAsync, isLoading } = useMutation(
     (url) =>
