@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { appendErrors, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
 import isURL from 'validator/lib/isURL'
 import { Orbit } from '@uiball/loaders'
