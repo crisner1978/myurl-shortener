@@ -18,37 +18,19 @@ To handle the Original URL submissions, I opted for the following packages:
 #### 4. For the API Route
 - [nanoid](https://github.com/ai/nanoid) used to generate a short url for the Original URL.
 - POST Route `/api/shorturl` creates a short url and saves the following information to MongoDB
-  ```
-  short_url: newShortURL,
-  original_url: requestedURL,
-  suffix: newShortURL,
-  ```
+
+![smallCode](https://user-images.githubusercontent.com/87502003/192669223-84237cba-48b4-43b1-8375-a8656c75aa0a.png)
+
 - GET Route `/api/shorturl[slug]` is a dynamic route to handle retrieving the Original URL from MongoDB by the short url provided in the query params. Then it sends a `res.redirect(urlRedirect.original_url)` back to the client.
 
 #### 5. To Shorten Your Link Even More
 In the `next.config.js` file, you will see that we are rewriting the API route.
 
 <div style="text-align: center;">
-  <img src="https://user-images.githubusercontent.com/87502003/192666754-62085ba0-c8b7-4a03-bc98-5be6f74310cc.png" alt="urlShortener" style="max-width: 75%; ">
+  <img src="https://user-images.githubusercontent.com/87502003/192666754-62085ba0-c8b7-4a03-bc98-5be6f74310cc.png" alt="urlShortener" style="max-width: 500px; ">
 </div>
 
-```
-module.exports = {
-  reactStrictMode: true,
-  async rewrites() {
-    return [
-      {
-        source: "/:slug",
-        destination: "/api/shorturl/:slug"
-      }
-    ]
-  },
-  env: {
-    DEV_URL: process.env.DEV_URL,
-    PROD_URL: process.env.PROD_URL,
-  }
-}
-```
+
 By doing this after a user requests a Short Link, they will be able to navigate to that Short Link by going to `http://localhost:3000/O6mSp` versus `http://localhost:3000/api/shorturl/O6mSp`
 
 ## Getting Setup:
