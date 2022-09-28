@@ -27,11 +27,11 @@ To handle the Original URL submissions, I opted for the following packages:
 
 #### 5. To Shorten Your Link Even More
 In the `next.config.js` file, you will see that we are rewriting the API route.
+
 <div style="text-align: center;">
-  <img src="https://user-images.githubusercontent.com/87502003/192666754-62085ba0-c8b7-4a03-bc98-5be6f74310cc.png" alt="urlShortener" style="max-width: 80%; ">
+  <img src="https://user-images.githubusercontent.com/87502003/192666754-62085ba0-c8b7-4a03-bc98-5be6f74310cc.png" alt="urlShortener" style="max-width: 75%; ">
 </div>
-![urlShortener](https://user-images.githubusercontent.com/87502003/192666754-62085ba0-c8b7-4a03-bc98-5be6f74310cc.png)
-![carbon](https://user-images.githubusercontent.com/87502003/192667334-410957e3-a5da-4733-8101-cc20171b284e.svg)
+
 ```
 module.exports = {
   reactStrictMode: true,
